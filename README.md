@@ -1,4 +1,4 @@
-##Configuracion del proyecto.
+## Configuracion del proyecto.
 
 El puerto a la escucha configurado para la APIREST es 8080 en localhost (//localhost:8080)
 El puerto configurado para las repuestas del servicio con react es 3000 (//localhost:3000)
