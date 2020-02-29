@@ -1,0 +1,13 @@
+CREATE TABLE public.persona
+(
+    id integer NOT NULL,
+    nombre character varying(20) COLLATE pg_catalog."default",
+    "contraseña" character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    apellido character varying(20) COLLATE pg_catalog."default",
+    telefono character varying(20) COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.persona
+    OWNER to postgres;
