@@ -74,7 +74,7 @@ export default class App extends Component{
           telefono : null
         }
       });
-      this.growl.show({severity: 'success', summary: 'Atención!', detail: 'Se guardó el registro correctamente.'});
+      this.growl.show({severity: 'success', summary: '¡Atención!', detail: 'Se guardó el registro correctamente.'});
       this.personaService.getAll().then(data => this.setState({personas: data}))
     })
   }
@@ -94,7 +94,7 @@ export default class App extends Component{
         <Menubar model={this.items}/>
         <br/>
         <Panel header="CRUD PERSONAS CON REACT Y SPRING BOOT">
-            <DataTable value={this.state.personas} paginator={true} rows="4" selectionMode="single" selection={this.state.selectedPersona} onSelectionChange={e => this.setState({selectedPersona: e.value})}>
+            <DataTable value={this.state.personas} paginator={true} rows="10" selectionMode="single" selection={this.state.selectedPersona} onSelectionChange={e => this.setState({selectedPersona: e.value})}>
               <Column field="id" header="Cedula"></Column>
               <Column field="nombre" header="Nombre"></Column>
               <Column field="apellido" header="Apellido"></Column>
@@ -105,7 +105,7 @@ export default class App extends Component{
         <Dialog header="Crear persona" visible={this.state.visible} style={{width: '400px'}} footer={this.footer} modal={true} onHide={() => this.setState({visible: false})}>
             <form id="persona-form">
             <span className="p-float-label">
-                <InputText value={this.state.persona.id} style={{width : '100%'}} id="id" onChange={(e) => {
+                <InputText value={this.state.persona.id}  keyfilter="pint" style={{width : '100%'}} id="id" onChange={(e) => {
                   let val = e.target.value;
                     this.setState(prevState => {
                         let persona = Object.assign({}, prevState.persona);
@@ -113,11 +113,11 @@ export default class App extends Component{
                         return { persona };
                     })}
                   } />
-                <label htmlFor="id">ID</label>
+                <label htmlFor="id">Cedula</label>
               </span>
               <br/>
               <span className="p-float-label">
-                <InputText value={this.state.persona.nombre} style={{width : '100%'}} id="nombre" onChange={(e) => {
+                <InputText value={this.state.persona.nombre} keyfilter = "alpha" style={{width : '100%'}} id="nombre" onChange={(e) => {
                     let val = e.target.value;
                     this.setState(prevState => {
                         let persona = Object.assign({}, prevState.persona);
@@ -130,7 +130,7 @@ export default class App extends Component{
               </span>
               <br/>
               <span className="p-float-label">
-                <InputText value={this.state.persona.apellido} style={{width : '100%'}} id="apellido" onChange={(e) => {
+                <InputText value={this.state.persona.apellido} keyfilter = "alpha" style={{width : '100%'}} id="apellido" onChange={(e) => {
                     let val = e.target.value;
                     this.setState(prevState => {
                         let persona = Object.assign({}, prevState.persona);
@@ -143,7 +143,7 @@ export default class App extends Component{
               </span>
               <br/>
               <span className="p-float-label">
-                <InputText value={this.state.persona.contraseña} style={{width : '100%'}} id="contraseña" onChange={(e) => {
+                <InputText value={this.state.persona.contraseña}  style={{width : '100%'}} id="contraseña" onChange={(e) => {
                     let val = e.target.value;
                     this.setState(prevState => {
                         let persona = Object.assign({}, prevState.persona);
@@ -156,7 +156,7 @@ export default class App extends Component{
               </span>
               <br/>
               <span className="p-float-label">
-                <InputText value={this.state.persona.telefono} style={{width : '100%'}} id="telefono" onChange={(e) => {
+                <InputText value={this.state.persona.telefono}  keyfilter="pint" style={{width : '100%'}} id="telefono" onChange={(e) => {
                     let val = e.target.value;
                     this.setState(prevState => {
                         let persona = Object.assign({}, prevState.persona);
@@ -185,6 +185,7 @@ export default class App extends Component{
         telefono : null
       }
     });
+    document.getElementById('persona-form').reset();
   }
 
   showEditDialog() {
@@ -197,6 +198,7 @@ export default class App extends Component{
         contraseña: this.state.selectedPersona.contraseña,
         telefono : this.state.selectedPersona.telefono
       }
-    })
+    });
+    document.getElementById('persona-form').reset();
   }
 }
